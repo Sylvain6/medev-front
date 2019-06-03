@@ -1,24 +1,36 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/login">Login</router-link>
-      <router-link to="/register">Register</router-link>
-    </div>
-    <router-view/>
+      <div class="container">
+        <Header />
+        <Body />
+      </div>
   </div>
 </template>
 
+<script>
+import Header from '@/components/Header'
+import Body from '@/components/Body'
+
+export default {
+  name: 'App',
+  components: {
+    Body,
+    Header
+  }
+}
+</script>
+
 <style>
+  @import './assets/sass/_styles.sass';
+
+  *{
+    box-sizing: border-box;
+  }
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Circular Std Book', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-}
-#nav {
-  padding: 30px;
 }
 
 #nav a {
@@ -26,7 +38,12 @@
   color: #2c3e50;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.container {
+  display: flex;
+  justify-content: center;
+  max-width: 66.7%;
+  flex-direction: column;
+  margin-left: 325px;
 }
+
 </style>

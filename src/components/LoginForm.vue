@@ -8,10 +8,8 @@
 </template>
 
 <script>
-import { login } from '@/store/actions'
-
 export default {
-  name: 'HelloWorld',
+  name: 'Login',
   data () {
     return {
       email: '',
@@ -21,13 +19,14 @@ export default {
   methods: {
     onSubmit () {
       const { email, password } = this
-      login({ email, password }).then(() => this.$router.push('/')).catch(err => console.log(err))
+      this.$store.dispatch('login', { email, password })
+        .then(() => this.$router.push('/'))
+        .catch(err => console.log(err))
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
   margin: 40px 0 0;
