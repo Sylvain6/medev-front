@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <img :ref=item.subject.name :src=item.subject.icon height="100px" width="100px" />
     <h1>{{ item.title }}</h1>
-        {{ item.content }}
+    <p>{{ item.content }}</p>
   </div>
 </template>
 
@@ -10,7 +10,7 @@
 import getPost from '@/store/actions/getPost'
 
 export default {
-  name: 'test',
+  name: 'Post',
   props: {
     id: {
       type: [Number, String],
@@ -18,7 +18,7 @@ export default {
     }
   },
   created () {
-    this.item = getPost(this.id).then(data => data).catch(err => { throw new Error('This post doesn\'t exist', err) })
+    getPost(this.id).then(data => { this.item = data }).catch(err => { throw new Error('This post doesn\'t exist', err) })
   },
   data () {
     return {

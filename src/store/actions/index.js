@@ -3,6 +3,8 @@ import login from './login'
 import register from './register'
 import posts from './getPosts'
 import post from './getPost'
+import createPost from './createPost'
+import getSubjects from './getSubjects'
 
 const instance = axios.create({
   baseURL: 'http://localhost:3000'
@@ -17,5 +19,7 @@ export {
   login,
   register,
   posts,
-  post
+  post,
+  createPost,
+  getSubjects
 }

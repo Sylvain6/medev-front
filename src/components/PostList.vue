@@ -1,16 +1,16 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+<div>
     <h1>Voici les posts de bg</h1>
     <ul>
     <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="limit">
       <li v-for="item in items" :key="item.id">
         <a v-on:click="goTo(item.id)" ><b>TITLE : </b>{{ item.title }}</a>
-        <p><b>CONTENT : </b>{{ item.content }}</p>
+        <p><b>CONTENT : </b>{{ item.content }}
+        <img :ref=item.subject.name :src=item.subject.icon height="20px" width="20px" /></p>
       </li>
   </div>
     </ul>
-  </div>
+    </div>
 </template>
 
 <script>
