@@ -1,13 +1,13 @@
 <template>
   <div id="post">
-    <input type="text" name="title" v-model="title" placeholder="Title" />
-    <input type="text" name="content" v-model="content" placeholder="Content" />
-      <select id="subjectList" v-model="subject">
+    <b-form-input type="text" name="title" v-model="title" placeholder="Title" />
+    <b-form-input type="text" name="content" v-model="content" placeholder="Content" />
+      <b-form-select id="subjectList" v-model="subject">
         <option v-for='subject in subjects' v-bind:value=subject.id v-bind:key=subject.id>
           {{subject.name}}
           </option>
-    </select>
-    <button type="button" v-on:click="onSubmit()">Share</button>
+    </b-form-select>
+  <b-button squared variant="info" v-on:click="onSubmit()">Share</b-button>
   </div>
 </template>
 

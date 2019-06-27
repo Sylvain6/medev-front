@@ -1,22 +1,40 @@
 <template>
 <div>
-    <h1>Voici les posts de bg</h1>
-    <ul>
     <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="limit">
-      <li v-for="item in items" :key="item.id">
-        <a v-on:click="goTo(item.id)" ><b>TITLE : </b>{{ item.title }}</a>
-        <p><b>CONTENT : </b>{{ item.content }}
-        <img :ref=item.subject.name :src=item.subject.icon height="20px" width="20px" /></p>
-      </li>
+      <div v-if="items.length > 0">
+      <div v-for="item in items" :key="item.id" >
+          <b-card :img-src="item.subject.icon"
+                  img-height="200"
+                  img-width="200"
+                  img-alt="Card image"
+                  img-left class="mb-3"
+                  :title="item.title"
+                  :sub-title="'Subject : ' + item.subject.name"
+                  style="margin-top:23px" >
+            <b-card-text>{{ item.content.substring(0,85) + '...' }}
+            <b-link class="card-link" v-on:click="goTo(item.id)">See more</b-link>
+            </b-card-text>
+            <b-card-text>
+              <b-button squared variant="info" v-on:click="postDegree('negative', item.id)">-</b-button>
+                {{ item.degree }}°
+              <b-button squared variant="info" v-on:click="postDegree('positive', item.id)">+</b-button>
+            </b-card-text>
+
+          </b-card>
   </div>
-    </ul>
+      </div>
+    <div v-else class="text-center">
+      <b-spinner variant="primary" label="Text Centered"></b-spinner>
     </div>
+ </div>
+</div>
 </template>
 
 <script>
 import Vue from 'vue'
-import getPosts from '@/store/actions/getPosts'
+import { addDegree, posts } from '@/store/actions'
 import infiniteScroll from 'vue-infinite-scroll'
+import store from '@/store'
 
 Vue.use(infiniteScroll)
 
@@ -30,12 +48,21 @@ export default {
     }
   },
   methods: {
+    postDegree (increment, postId) {
+      // eslint-disable-next-line
+      const { id: user_id } = store.state.user
+      addDegree({
+        positive: increment,
+        user_id,
+        post_id: postId
+      }).then(() => this.$router.push('/')).catch(err => console.log(err))
+    },
     goTo (id) {
       this.$router.push({ name: 'post', params: { id: id } })
     },
     loadMore: function () {
       this.busy = true
-      getPosts().then(res => {
+      posts().then(res => {
         const append = res.slice(this.items.length, this.items.length + this.limit)
         this.items = this.items.concat(append)
         this.busy = false
@@ -51,7 +78,4 @@ export default {
 </script>
 
 <style scoped>
-a {
-  cursor: pointer;
-}
 </style>

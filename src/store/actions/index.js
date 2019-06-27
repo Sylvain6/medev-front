@@ -5,6 +5,9 @@ import posts from './getPosts'
 import post from './getPost'
 import createPost from './createPost'
 import getSubjects from './getSubjects'
+import addDegree from './addDegree'
+import getDegree from './getDegree'
+import deleteDegree from './deleteDegree'
 
 const instance = axios.create({
   baseURL: 'http://localhost:3000'
@@ -21,5 +24,8 @@ export {
   posts,
   post,
   createPost,
-  getSubjects
+  getSubjects,
+  addDegree,
+  getDegree,
+  deleteDegree
 }

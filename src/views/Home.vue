@@ -1,9 +1,12 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+<b-container fluid>
   <div v-if=userToken><PostForm /></div>
-  <PostList />
-  </div>
+  <b-row >
+    <b-col></b-col>
+    <b-col cols="9"><PostList /></b-col>
+    <b-col></b-col>
+  </b-row>
+</b-container>
 </template>
 
 <script>

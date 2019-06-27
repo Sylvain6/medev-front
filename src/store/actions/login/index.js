@@ -9,9 +9,7 @@ const login = data => new Promise((resolve, reject) => {
       const token = res.data.token
       localStorage.removeItem('user-token')
       localStorage.setItem('user-token', token)
-      console.log(res.data.user)
       store.commit('logUser', res.data.user)
-      console.log(store.state.user)
       resolve(res)
     })
       .catch(err => {
