@@ -1,9 +1,18 @@
 <template>
-  <div class="home">
+<b-container fluid style='margin-top:10px'>
+  <b-row >
+    <b-col></b-col>
+    <b-col cols="9" >
+  <div class="home text-center" >
     <img :ref=item.subject.name :src=item.subject.icon height="100px" width="100px" />
-    <h1>{{ item.title }}</h1>
-    <p>{{ item.content }}</p>
+    <h1>{{ item.title }} ({{item.degree}}°)</h1>
+    <h4><i>{{ item.subject.name }}</i></h4>
   </div>
+    <p>{{ item.content }}</p>
+    <p>Authored by : {{ item.user.name }} <timeago :datetime="item.created_at" :auto-update="10"></timeago></p></b-col>
+    <b-col></b-col>
+  </b-row>
+</b-container>
 </template>
 
 <script>

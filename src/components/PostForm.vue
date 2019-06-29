@@ -1,13 +1,18 @@
 <template>
+<div>
+  <b-button squared variant="info" v-b-modal.modal-lg style='margin-top:10px'>Create my own Post</b-button>
+  <b-modal id="modal-lg" size="lg" title="Create a post" hide-footer>
   <div id="post">
-    <b-form-input type="text" name="title" v-model="title" placeholder="Title" />
-    <b-form-input type="text" name="content" v-model="content" placeholder="Content" />
-      <b-form-select id="subjectList" v-model="subject">
+  <p>Title :<b-form-input type="text" name="title" v-model="title" placeholder="Title" /></p>
+    <p>Content :<b-form-textarea type="text" name="content" v-model="content" placeholder="Content" /></p>
+      <p>Subject :<b-form-select id="subjectList" v-model="subject">
         <option v-for='subject in subjects' v-bind:value=subject.id v-bind:key=subject.id>
           {{subject.name}}
           </option>
-    </b-form-select>
+    </b-form-select></p>
   <b-button squared variant="info" v-on:click="onSubmit()">Share</b-button>
+  </div>
+</b-modal>
   </div>
 </template>
 
@@ -47,7 +52,4 @@ export default {
 </script>
 
 <style scoped>
-a {
-  cursor: pointer;
-}
 </style>
