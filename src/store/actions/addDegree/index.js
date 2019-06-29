@@ -12,10 +12,15 @@ const addDegree = data => new Promise((resolve, reject) => {
     config.post('degrees', data).then(res => {
       resolve(res)
     })
-      .catch(err => {
-        reject(err)
+      .catch(() => {
+        getDegree(data.user_id, data.post_id, data.positive).then(res => {
+          if (res.data.length > 0) {
+            deleteDegree(res.data[0].id).then(() => {}).catch(err => console.error(err))
+          }
+          resolve(res)
+        }).catch(err => console.error(err))
       })
-  }).catch(err => console.log(err))
+  }).catch(err => reject(err))
 }
 )
 

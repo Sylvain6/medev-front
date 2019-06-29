@@ -3,7 +3,8 @@
     <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="limit">
       <div v-if="items.length > 0">
       <div v-for="item in items" :key="item.id" >
-          <b-card :img-src="item.subject.icon"
+        <PostComponent :item=item></PostComponent>
+          <!-- <b-card :img-src="item.subject.icon"
                   img-height="200"
                   img-width="200"
                   img-alt="Card image"
@@ -20,7 +21,7 @@
               <b-button squared variant="info" v-on:click="postDegree('positive', item.id)">+</b-button>
             </b-card-text>
 
-          </b-card>
+          </b-card> -->
   </div>
       </div>
     <div v-else class="text-center">
@@ -32,9 +33,9 @@
 
 <script>
 import Vue from 'vue'
-import { addDegree, posts } from '@/store/actions'
+import { posts } from '@/store/actions'
+import PostComponent from './Post'
 import infiniteScroll from 'vue-infinite-scroll'
-import store from '@/store'
 
 Vue.use(infiniteScroll)
 
@@ -48,15 +49,6 @@ export default {
     }
   },
   methods: {
-    postDegree (increment, postId) {
-      // eslint-disable-next-line
-      const { id: user_id } = store.state.user
-      addDegree({
-        positive: increment,
-        user_id,
-        post_id: postId
-      }).then(() => this.$router.push('/')).catch(err => console.log(err))
-    },
     goTo (id) {
       this.$router.push({ name: 'post', params: { id: id } })
     },
@@ -73,7 +65,8 @@ export default {
     } },
   created () {
     this.loadMore()
-  }
+  },
+  components: { PostComponent }
 }
 </script>
 

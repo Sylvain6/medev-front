@@ -1,12 +1,12 @@
 <template>
-  <thePost :id=id />
+  <PostPage :id=id />
 </template>
 
 <script>
-import thePost from '../components/Post'
+import PostPage from '../components/PostPage'
 export default {
-  name: 'Post',
-  components: { thePost },
+  name: 'PostView',
+  components: { PostPage },
   data () {
     return {
       id: this.$route.params.id

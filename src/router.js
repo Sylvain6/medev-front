@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Register from './views/Register.vue'
 import Login from './views/Login.vue'
-import Post from './views/Post.vue'
+import PostPage from './views/PostPage.vue'
 
 Vue.use(Router)
 
@@ -29,7 +29,7 @@ export default new Router({
     {
       path: '/post/:id',
       name: 'post',
-      component: Post
+      component: PostPage
     }
   ]
 })
