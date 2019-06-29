@@ -1,4 +1,5 @@
 import config from '../index.js'
+import store from '@/store'
 
 const token = localStorage.getItem('user-token')
 
@@ -8,6 +9,7 @@ const login = data => new Promise((resolve, reject) => {
       const token = res.data.token
       localStorage.removeItem('user-token')
       localStorage.setItem('user-token', token)
+      store.commit('logUser', res.data.user)
       resolve(res)
     })
       .catch(err => {
@@ -15,7 +17,6 @@ const login = data => new Promise((resolve, reject) => {
         reject(err)
       })
   }
-  throw new Error('Already connected')
 })
 
 export default login
