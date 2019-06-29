@@ -21,6 +21,9 @@
                 {{ degree }}°
               <b-button squared variant="info" v-on:click="postDegree('positive', item.id)">+</b-button>
           </b-card-text>
+          <b-card-text>
+            <i>Authored by {{item.user.name}} <timeago :datetime="item.created_at" :auto-update="10"></timeago></i>
+          </b-card-text>
         </b-card-body>
 
           </b-card>
