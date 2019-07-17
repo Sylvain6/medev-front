@@ -1,34 +1,66 @@
 <template>
-<div>
-  <b-navbar type="dark" variant="dark">
-    <b-navbar-nav>
-      <b-nav-item to="/">Home</b-nav-item>
-      <b-nav-item to="/login">Login</b-nav-item>
-      <b-nav-item to="/register">Register</b-nav-item>
-    </b-navbar-nav>
-  </b-navbar>
-    <router-view/>
-</div>
+  <div id="app">
+    <div class="container">
+      <template>
+        <el-header>
+          <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
+            <el-menu-item index="1">
+              <router-link to="/">Home</router-link>
+            </el-menu-item>
+            <el-menu-item index="2">
+              <router-link to="/login">Login</router-link>
+            </el-menu-item>
+            <el-menu-item index="3">
+              <router-link to="/register">Register</router-link>
+            </el-menu-item>
+            <!--
+            <el-menu-item index="4">
+              <router-link v-if="isLoggedIn" @click="logout">Logout</router-link>
+            </el-menu-item>-->
+          </el-menu>
+        </el-header>
+      </template>
+      <router-view />
+    </div>
+  </div>
 </template>
 
+<script>
+
+export default {
+  name: 'App',
+  data () {
+    return {
+      activeIndex: '1'
+    }
+  }
+}
+</script>
+
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
+  @import './assets/sass/_styles.sass';
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  * {
+    box-sizing: border-box;
+  }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+  #app {
+    font-family: 'Circular Std Book', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2c3e50;
+  }
+
+  #nav a {
+    font-weight: bold;
+    color: #2c3e50;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    max-width: 66.7%;
+    flex-direction: column;
+    margin-left: 325px;
+  }
 </style>

@@ -1,9 +1,15 @@
 <template>
   <div id="login">
     <h1>Login</h1>
-    <input type="text" name="email" v-model="email" placeholder="Email" />
-    <input type="password" name="password" v-model="password" placeholder="Password" />
-    <button type="button" v-on:click="onSubmit()">Login</button>
+    <el-form :label-position="labelPosition" status-icon :rules="rules" label-width="180px" ref="formLogin" :model="formLogin">
+      <el-form-item label="Email" prop="email">
+        <el-input v-model="formLogin.email" />
+      </el-form-item>
+      <el-form-item label="Password" prop="password">
+        <el-input type="password" v-model="formLogin.password" show-password />
+      </el-form-item>
+      <el-button type="primary" @click="onSubmit('formLogin')">Register</el-button>
+    </el-form>
   </div>
 </template>
 
@@ -11,17 +17,40 @@
 import { login } from '@/store/actions'
 
 export default {
-  name: 'HelloWorld',
+  name: 'Login',
   data () {
     return {
-      email: '',
-      password: ''
+      labelPosition: 'left',
+      formLogin: {
+        email: '',
+        password: ''
+      },
+
+      rules: {
+        email: [
+          { required: true, message: 'Please input an email address', trigger: 'blur' },
+          { type: 'email', message: 'Please input a correct email address', trigger: ['blur', 'change'] }
+        ],
+        password: [
+          { required: true, message: 'Please input a password', trigger: 'blur' }
+        ]
+      }
     }
   },
   methods: {
-    onSubmit () {
-      const { email, password } = this
-      login({ email, password }).then(() => this.$router.push('/')).catch(err => console.log(err))
+    onSubmit (formInput) {
+      const {
+        email,
+        password
+      } = this.formLogin
+
+      this.$refs[formInput].validate((valid) => {
+        if (valid) {
+          login({ email, password }).then(() => this.$router.push('/')).catch(err => console.log(err))
+        } else {
+          return false
+        }
+      })
     }
   }
 }

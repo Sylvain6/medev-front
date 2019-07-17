@@ -1,12 +1,10 @@
 <template>
-<b-container fluid>
-  <div v-if=userToken><PostForm /></div>
-  <b-row >
-    <b-col></b-col>
-    <b-col cols="9"><PostList /></b-col>
-    <b-col></b-col>
-  </b-row>
-</b-container>
+  <el-container>
+    <el-main>
+      <div v-if=userToken><PostForm /></div>
+      <PostList />
+    </el-main>
+  </el-container>
 </template>
 
 <script>
