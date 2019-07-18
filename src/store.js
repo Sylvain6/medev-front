@@ -14,6 +14,11 @@ export default new Vuex.Store({
   mutations: {
     logUser (state, user) {
       state.user = user
+      state.isLoggedIn = !!localStorage.getItem('user-token')
+    },
+    logout (state) {
+      state.user = {}
+      state.isLoggedIn = false
     },
     setTotalDegree (state, totalDegree) {
       state.totalDegree = totalDegree

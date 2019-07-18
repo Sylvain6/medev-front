@@ -1,5 +1,6 @@
 import axios from 'axios'
 import login from './login'
+import logout from './logout'
 import register from './register'
 import posts from './getPosts'
 import post from './getPost'
@@ -21,6 +22,7 @@ if (token) {
 export default instance
 export {
   login,
+  logout,
   register,
   posts,
   post,

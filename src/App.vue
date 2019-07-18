@@ -7,16 +7,15 @@
             <el-menu-item index="1">
               <router-link to="/">Home</router-link>
             </el-menu-item>
-            <el-menu-item index="2">
+            <el-menu-item v-if="!isLoggedIn" index="2">
               <router-link to="/login">Login</router-link>
             </el-menu-item>
-            <el-menu-item index="3">
+            <el-menu-item v-if="!isLoggedIn" index="3">
               <router-link to="/register">Register</router-link>
             </el-menu-item>
-            <!--
-            <el-menu-item index="4">
-              <router-link v-if="isLoggedIn" @click="logout">Logout</router-link>
-            </el-menu-item>-->
+            <el-menu-item v-if="isLoggedIn" index="4">
+              <div @click="logout()">Logout</div>
+            </el-menu-item>
           </el-menu>
         </el-header>
       </template>
@@ -26,12 +25,23 @@
 </template>
 
 <script>
+import { logout } from '@/store/actions'
 
 export default {
   name: 'App',
   data () {
     return {
-      activeIndex: '1'
+      activeIndex: '1',
+      isLoggedIn: this.$store.state.isLoggedIn
+    }
+  },
+  methods: {
+    logout () {
+      const isLoggedIn = this.$store.state.isLoggedIn
+      if (isLoggedIn) {
+        logout()
+        this.$router.push('/login')
+      }
     }
   }
 }

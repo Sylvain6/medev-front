@@ -8,7 +8,7 @@
       <el-form-item label="Password" prop="password">
         <el-input type="password" v-model="formLogin.password" show-password />
       </el-form-item>
-      <el-button type="primary" @click="onSubmit('formLogin')">Register</el-button>
+      <el-button type="primary" @click="onSubmit('formLogin')">Login</el-button>
     </el-form>
   </div>
 </template>
