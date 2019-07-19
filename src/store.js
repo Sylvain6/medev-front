@@ -9,7 +9,9 @@ export default new Vuex.Store({
     user: {},
     isLoggedIn: !!localStorage.getItem('user-token'),
     totalDegree: 0,
-    subjectNumber: 0
+    subjectNumber: 0,
+    posts: [],
+    postLoad: false
   },
   mutations: {
     logUser (state, user) {
@@ -20,7 +22,18 @@ export default new Vuex.Store({
     },
     setSubjectNumber (state, subjectNumber) {
       state.subjectNumber = subjectNumber
+    },
+    togglePostLoad (state, postLoaded) {
+      state.postLoad = postLoaded
+    },
+    setPosts (state, posts) {
+      state.posts = posts
+    },
+    addPost (state, post) {
+      state.posts.push(post)
     }
   },
-  plugins: [createPersistedState()]
+  plugins: [createPersistedState({
+    paths: ['user', 'isLoggedIn', 'totalDegree', 'subjectNumber']
+  })]
 })

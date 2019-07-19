@@ -6,6 +6,7 @@ import post from './getPost'
 import createPost from './createPost'
 import getSubjects from './getSubjects'
 import getSubject from './getSubject'
+import getUser from './getUser'
 import addDegree from './addDegree'
 import getDegree from './getDegree'
 import deleteDegree from './deleteDegree'
@@ -29,5 +30,6 @@ export {
   getSubject,
   addDegree,
   getDegree,
-  deleteDegree
+  deleteDegree,
+  getUser
 }
