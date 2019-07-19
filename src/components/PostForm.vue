@@ -10,7 +10,7 @@
           {{subject.name}}
           </option>
     </b-form-select></p>
-  <b-button squared variant="info" v-on:click="onSubmit()">Share</b-button>
+  <b-button squared variant="info" v-on:click="onSubmit()" @click="$bvModal.hide('modal-lg')">Share</b-button>
   </div>
 </b-modal>
   </div>
