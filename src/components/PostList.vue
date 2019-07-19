@@ -1,33 +1,14 @@
 <template>
-<div>
+<div id="postList">
+  <h1>Posts</h1>
     <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="limit">
       <div v-if="items.length > 0">
-      <div v-for="item in items" :key="item.id" >
-        <PostComponent :item=item></PostComponent>
-          <!-- <b-card :img-src="item.subject.icon"
-                  img-height="200"
-                  img-width="200"
-                  img-alt="Card image"
-                  img-left class="mb-3"
-                  :title="item.title"
-                  :sub-title="'Subject : ' + item.subject.name"
-                  style="margin-top:23px" >
-            <b-card-text>{{ item.content.substring(0,85) + '...' }}
-            <b-link class="card-link" v-on:click="goTo(item.id)">See more</b-link>
-            </b-card-text>
-            <b-card-text>
-              <b-button squared variant="info" v-on:click="postDegree('negative', item.id)">-</b-button>
-                {{ item.degree }}°
-              <b-button squared variant="info" v-on:click="postDegree('positive', item.id)">+</b-button>
-            </b-card-text>
-
-          </b-card> -->
-  </div>
+        <div v-for="item in items" :key="item.id" >
+          <PostComponent :item=item />
+        </div>
       </div>
-    <div v-else class="text-center">
-      <b-spinner variant="primary" label="Text Centered"></b-spinner>
+      <div v-else v-loading="busy" class="loader"></div>
     </div>
- </div>
 </div>
 </template>
 
@@ -71,4 +52,17 @@ export default {
 </script>
 
 <style scoped>
+  #postList {
+    max-width: 1025px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  h1 {
+    margin-bottom: 25px
+  }
+
+  .loader {
+    margin-top: 25px
+  }
 </style>

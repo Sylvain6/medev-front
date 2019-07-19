@@ -1,24 +1,28 @@
 <template>
   <div id="register">
     <h1>Register</h1>
-    <el-form :label-position="labelPosition" status-icon :rules="rules" label-width="180px" ref="formRegister" :model="formRegister">
-      <el-form-item label="Name" prop="name">
-        <el-input v-model="formRegister.name" />
-      </el-form-item>
-      <el-form-item label="Username" prop="username">
-        <el-input v-model="formRegister.username" />
-      </el-form-item>
-      <el-form-item label="Email" prop="email">
-        <el-input v-model="formRegister.email" />
-      </el-form-item>
-      <el-form-item label="Password" prop="password">
-        <el-input type="password" v-model="formRegister.password" show-password />
-      </el-form-item>
-      <el-form-item label="Password Confirmation" prop="password_confirmation">
-        <el-input type="password" v-model="formRegister.password_confirmation" show-password />
-      </el-form-item>
-      <el-button type="primary" @click="onSubmit('formRegister')">Register</el-button>
-    </el-form>
+    <div class="form-auth">
+      <el-container>
+        <el-form :label-position="labelPosition" status-icon :rules="rules" label-width="180px" ref="formRegister" :model="formRegister">
+          <el-form-item label="Name" prop="name">
+            <el-input v-model="formRegister.name" />
+          </el-form-item>
+          <el-form-item label="Username" prop="username">
+            <el-input v-model="formRegister.username" />
+          </el-form-item>
+          <el-form-item label="Email" prop="email">
+            <el-input v-model="formRegister.email" />
+          </el-form-item>
+          <el-form-item label="Password" prop="password">
+            <el-input type="password" v-model="formRegister.password" show-password />
+          </el-form-item>
+          <el-form-item label="Password Confirmation" prop="password_confirmation">
+            <el-input type="password" v-model="formRegister.password_confirmation" show-password />
+          </el-form-item>
+          <el-button type="primary" @click="onSubmit('formRegister')">Register</el-button>
+        </el-form>
+      </el-container>
+    </div>
   </div>
 </template>
 
@@ -104,11 +108,18 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+#register {
+  max-width: 1025px;
+  margin-left: auto;
+  margin-right: auto;
+}
+h1 {
+  padding: 10px 10px 20px 10px
+}
+
+.form-auth {
+  margin-left: 30px
 }
 ul {
   list-style-type: none;

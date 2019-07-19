@@ -1,15 +1,19 @@
 <template>
   <div id="login">
     <h1>Login</h1>
-    <el-form :label-position="labelPosition" status-icon :rules="rules" label-width="180px" ref="formLogin" :model="formLogin">
-      <el-form-item label="Email" prop="email">
-        <el-input v-model="formLogin.email" />
-      </el-form-item>
-      <el-form-item label="Password" prop="password">
-        <el-input type="password" v-model="formLogin.password" show-password />
-      </el-form-item>
-      <el-button type="primary" @click="onSubmit('formLogin')">Login</el-button>
-    </el-form>
+    <el-container>
+      <div class="form-auth">
+        <el-form :label-position="labelPosition" status-icon :rules="rules" label-width="180px" ref="formLogin" :model="formLogin">
+          <el-form-item label="Email" prop="email">
+            <el-input v-model="formLogin.email" />
+          </el-form-item>
+          <el-form-item label="Password" prop="password">
+            <el-input type="password" v-model="formLogin.password" show-password />
+          </el-form-item>
+          <el-button type="primary" @click="onSubmit('formLogin')">Login</el-button>
+        </el-form>
+      </div>
+    </el-container>
   </div>
 </template>
 
@@ -46,7 +50,10 @@ export default {
 
       this.$refs[formInput].validate((valid) => {
         if (valid) {
-          login({ email, password }).then(() => this.$router.push('/')).catch(err => console.log(err))
+          login({ email, password })
+            .then(() => this.$router.push('/'))
+            .then(() => location.reload())
+            .catch(err => console.log(err))
         } else {
           return false
         }
@@ -55,11 +62,17 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+#login {
+  max-width: 1025px;
+  margin-left: auto;
+  margin-right: auto;
+}
+h1 {
+  padding: 10px 10px 20px 10px
+}
+.form-auth {
+  margin-left: 30px
 }
 ul {
   list-style-type: none;

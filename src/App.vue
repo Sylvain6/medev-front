@@ -41,6 +41,7 @@ export default {
       if (isLoggedIn) {
         logout()
         this.$router.push('/login')
+        location.reload()
       }
     }
   }
