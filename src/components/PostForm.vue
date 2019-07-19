@@ -1,57 +1,39 @@
 <template>
-<div id="post">
-  <el-button @click="dialogVisible = true">Create my own Post</el-button>
-  <el-dialog title="Create Post" :visible.sync="dialogVisible">
-    <div>
-      <el-form label-position="labelPosition" status-icon :rules="rules" label-width="180px" ref="formPost" :model="formPost">
-        <el-form-item label="Title" prop="title">
-          <el-input v-model="formPost.title" clearable/>
-        </el-form-item>
-        <el-form-item label="Content" prop="content">
-          <el-input v-model="formPost.content" clearable/>
-        </el-form-item>
-        <el-select v-model="value" placeholder="Select">
-          <el-option
-            v-for='subject in subjects'
-            :key="subject.id"
-            :label="subject.name"
-            :value="subject.id">
+  <div>
+    <b-button squared variant="info" v-b-modal.modal-lg style='margin-top:10px'>Create my own Post</b-button>
+    <b-modal id="modal-lg" size="lg" title="Create a post" hide-footer>
+      <div id="post">
+        <p>Title :<b-form-input type="text" name="title" v-model="title" placeholder="Title" /></p>
+        <p>Content :<b-form-textarea type="text" name="content" v-model="content" placeholder="Content" /></p>
+        <p>Subject :<b-form-select id="subjectList" v-model="subject">
+          <option v-for='subject in subjects' v-bind:value=subject.id v-bind:key=subject.id>
             {{subject.name}}
-          </el-option>
-        </el-select>
-      </el-form>
-      <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogVisible = false">Annuler</el-button>
-    <el-button type="primary" @click="onSubmit()">Share</el-button>
-  </span>
-    </div>
-  </el-dialog>
-</div>
+          </option>
+        </b-form-select></p>
+        <b-button squared variant="info" v-on:click="onSubmit()" @click="$bvModal.hide('modal-lg')">Share</b-button>
+      </div>
+    </b-modal>
+  </div>
 </template>
 
 <script>
 import { createPost, getSubjects } from '@/store/actions'
 import store from '@/store'
-
 export default {
   name: 'PostForm',
   data () {
     return {
-      formPost: {
-        title: '',
-        content: '',
-        subjects: [],
-        subject: ''
-      },
-      labelPosition: 'left',
-      dialogVisible: false
+      title: '',
+      content: '',
+      subjects: [],
+      subject: ''
     }
   },
   methods: {
     onSubmit () {
       const { title, content, subject } = this
       // eslint-disable-next-line
-      const { id: user_id } = store.state.user
+        const { id: user_id } = store.state.user
       createPost({
         title,
         content,

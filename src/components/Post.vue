@@ -1,32 +1,36 @@
 <template>
 <div>
-  <el-card>
-    <el-row :gutter="20">
-      <el-col :span="4">
-        <img :src="item.subject.icon" class="image" alt="Card image">
-      </el-col>
-      <el-col :span="16">
-        <h4>{{item.title}}</h4>
+  <b-card no-body
+          :img-src="item.subject.icon"
+          img-height="200"
+          img-width="200"
+          img-alt="Card image"
+          img-left class="mb-3"
+          :sub-title="`Subject : ${item.subject.name}`"
+          style="margin-top:23px" >
+    <p></p>
+    <b-card-body :title="item.title">
+      <b-card-text>
         <p>
-          <i>Subject : {{item.subject.name}}, </i>
-          <i class="icon-newline"> Weather : </i>
-          <img :src="imgLink" width="20" height="20" />
-        </p>
-          {{ item.content.substring(0,85) + '...' }}
-        <el-link class="link-post" @click="handleRedirection()">
-          See more
-        </el-link>
-        <p class="degrees">
-          <el-button type="primary" icon="el-icon-minus" @click="postDegree('negative', item.id)" circle></el-button>
-          {{ degree }}
-          <el-button type="primary" icon="el-icon-plus" @click="postDegree('positive', item.id)" circle></el-button>
+          <i>Subject : {{item.subject.name}} </i>
         </p>
         <p>
-          <i>Authored by {{item.user.name}} <timeago :datetime="item.created_at" :auto-update="10"></timeago></i>
+          <i> Weather :</i> <img :src="imgLink" width="20" height="20" />
         </p>
-      </el-col>
-    </el-row>
-  </el-card>
+        {{ item.content.substring(0,85) + '...' }}
+        <b-link class="card-link" v-on:click="handleRedirection()">
+          See more</b-link>
+      </b-card-text>
+      <b-card-text>
+        <b-button squared variant="info" v-on:click="postDegree('negative', item.id)">-</b-button>
+        {{ degree }}°
+        <b-button squared variant="info" v-on:click="postDegree('positive', item.id)">+</b-button>
+      </b-card-text>
+      <b-card-text>
+        <i>Authored by {{item.user.name}} <timeago :datetime="item.created_at" :auto-update="10"></timeago></i>
+      </b-card-text>
+    </b-card-body>
+  </b-card>
 </div>
 </template>
 

@@ -1,7 +1,6 @@
 <template>
   <el-container>
     <el-main>
-      <div v-if=userToken><PostForm /></div>
       <PostList />
     </el-main>
   </el-container>
@@ -9,17 +8,14 @@
 
 <script>
 import PostList from '@/components/PostList'
-import PostForm from '@/components/PostForm'
 
 export default {
   name: 'home',
-  components: { PostList, PostForm },
-  data () {
-    return {
-      userToken: !!localStorage.getItem('user-token')
-    }
-  }
+  components: { PostList }
 }
 </script>
  <style scoped>
+   .postList {
+     max-width: 1025px;
+   }
 </style>
